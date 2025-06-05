@@ -38,7 +38,8 @@ docker run -p 8080:8080 prueba-dev-backend
 
 ### 3. Comprobar ejecución
 
-Acceder a Swagger UI en: http://localhost:8080/swagger-ui.html
+Acceder a Swagger UI en: https://pruebadevbackend.onrender.com/webjars/swagger-ui/index.html  
+O en local: http://localhost:8080/swagger-ui.html
 
 ---
 
