@@ -47,6 +47,19 @@ build/
 .project
 .classpath
 
+# Terraform
+.terraform/
+terraform/.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+terraform.tfvars
+terraform.tfstate.backup
+
 # Mac OS
 .DS_Store
 
