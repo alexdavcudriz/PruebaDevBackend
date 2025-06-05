@@ -4,6 +4,8 @@ import com.accenture.challenge_backend.application.port.ActualizarNombreSucursal
 import com.accenture.challenge_backend.application.port.AgregarSucursalUseCase;
 import com.accenture.challenge_backend.domain.model.FranquiciaDTO;
 import com.accenture.challenge_backend.domain.model.SucursalDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/franquicias")
+@Tag(name = "Sucursales", description = "API para gestión de sucursales")
 @RequiredArgsConstructor
 public class SucursalController {
 
@@ -22,6 +25,7 @@ public class SucursalController {
     private final ActualizarNombreSucursalUseCase actualizarNombreSucursalUseCase;
 
     @PostMapping("/{id}/sucursales")
+    @Operation(summary = "Agregar sucursal", description = "Agrega una sucursal a una franquicia especifica")
     public Mono<FranquiciaDTO> agregarSucursal(
             @PathVariable String id,
             @RequestBody SucursalDTO request) {
@@ -29,6 +33,7 @@ public class SucursalController {
     }
 
     @PatchMapping("/{franquiciaId}/sucursales/{sucursalId}")
+    @Operation(summary = "Actualizar nombre sucursal", description = "Actualiza el nombre de una sucursal específica")
     public Mono<FranquiciaDTO> actualizarNombreSucursal(
             @PathVariable String franquiciaId,
             @PathVariable String sucursalId,

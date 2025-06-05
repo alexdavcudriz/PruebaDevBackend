@@ -7,6 +7,8 @@ import com.accenture.challenge_backend.application.port.ObtenerProductosMayorSto
 import com.accenture.challenge_backend.domain.model.FranquiciaDTO;
 import com.accenture.challenge_backend.infrastructure.document.FranquiciaDocument;
 import com.accenture.challenge_backend.domain.model.QuerySucursalDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/franquicias")
+@Tag(name = "Franquicias", description = "API para gestión de franquicias")
 @RequiredArgsConstructor
 public class FranquiciaController {
 
@@ -32,21 +35,25 @@ public class FranquiciaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Crear franquicia", description = "Crea una franquicia en BD")
     public Mono<FranquiciaDTO> crearFranquicia(@RequestBody FranquiciaDTO request) {
         return crearFranquiciaUseCase.execute(request);
     }
 
     @GetMapping
+    @Operation(summary = "Obtener franquicias", description = "Devuelve una lista con todas las franquicias")
     public Flux<FranquiciaDTO> obtenerFranquicias() {
         return obtenerFranquiciasUseCase.execute();
     }
 
     @GetMapping("/{id}/productos-mayor-stock")
+    @Operation(summary = "Obtener mayor producto stock", description = "Devuelve los datos de las sucursales de una franquicia especifica mostrando su producto con mayor stock")
     public Flux<QuerySucursalDTO> obtenerProductosMayorStock(@PathVariable String id) {
         return obtenerProductosMayorStockPorSucursalUseCase.execute(id);
     }
 
     @PatchMapping("/{id}")
+    @Operation(summary = "Actualizar nombre franquicia", description = "Actualiza el nombre de una franquicia específica")
     public Mono<FranquiciaDTO> actualizarNombreFranquicia(
             @PathVariable String id,
             @RequestBody FranquiciaDocument request) {

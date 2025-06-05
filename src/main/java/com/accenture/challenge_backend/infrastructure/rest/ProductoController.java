@@ -6,8 +6,8 @@ import com.accenture.challenge_backend.application.port.AgregarProductoUseCase;
 import com.accenture.challenge_backend.application.port.EliminarProductoSucursalUseCase;
 import com.accenture.challenge_backend.domain.model.FranquiciaDTO;
 import com.accenture.challenge_backend.domain.model.ProductoDTO;
-import com.accenture.challenge_backend.infrastructure.document.FranquiciaDocument;
-import com.accenture.challenge_backend.infrastructure.document.ProductoDocument;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,10 +20,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import java.util.Map;
-
 @RestController
 @RequestMapping("/api/franquicias")
+@Tag(name = "Productos", description = "API para gestión de productos")
 @RequiredArgsConstructor
 public class ProductoController {
 
@@ -34,6 +33,7 @@ public class ProductoController {
 
     @PostMapping("/{franquiciaId}/sucursales/{sucursalId}/productos")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Agregar producto", description = "Agrega un producto a una sucursal especifica")
     public Mono<FranquiciaDTO> agregarProducto(
             @PathVariable String franquiciaId,
             @PathVariable String sucursalId,
@@ -42,6 +42,7 @@ public class ProductoController {
     }
 
     @DeleteMapping("/{franquiciaId}/sucursales/{sucursalId}/productos/{productoId}")
+    @Operation(summary = "Eliminar producto", description = "Elimina un producto de una sucursal especifica")
     public Mono<FranquiciaDTO> eliminarProductoDeSucursal(
             @PathVariable String franquiciaId,
             @PathVariable String sucursalId,
@@ -50,6 +51,7 @@ public class ProductoController {
     }
 
     @PatchMapping("/{franquiciaId}/sucursales/{sucursalId}/productos/{productoId}/stock")
+    @Operation(summary = "Actualizar stock", description = "Actualiza el stock de un producto de una sucursal especifica")
     public Mono<FranquiciaDTO> actualizarStockProducto(
             @PathVariable String franquiciaId,
             @PathVariable String sucursalId,
@@ -59,6 +61,7 @@ public class ProductoController {
     }
 
     @PatchMapping("/{franquiciaId}/sucursales/{sucursalId}/productos/{productoId}")
+    @Operation(summary = "Actualizar nombre producto", description = "Actualiza el nombre de un producto específico")
     public Mono<ProductoDTO> actualizarNombreProducto(
             @PathVariable String franquiciaId,
             @PathVariable String sucursalId,
